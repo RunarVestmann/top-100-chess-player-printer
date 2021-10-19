@@ -27,7 +27,7 @@ def open_file(filename):
         return None
 
 def get_player_dict(file_object):
-    ''' Returns a dictionary where the key is the players name and the value is a tuple containing the player's rank, country, rating and birthyear'''
+    ''' Returns a dictionary where the key is the name of a player and the value is a tuple containing the rank, country, rating and birthyear of a player'''
     player_dict = dict()
 
     for line in file_object:
