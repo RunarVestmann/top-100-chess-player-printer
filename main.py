@@ -14,18 +14,20 @@ def main():
 
     file_object.close()
 
-    country_dict = get_country_dict(player_dict)
+    country_dict = get_order_dict(player_dict, COUNTRY)
 
     print_header("Players by country:")
     print_sorted_player_information(country_dict, player_dict)
 
 def open_file(filename):
+    '''Returns a file object if the given filename could be found and returns None otherwise'''
     try:
         return open(filename)
     except FileNotFoundError:
         return None
 
 def get_player_dict(file_object):
+    ''' Returns a dictionary where the key is the players name and the value is a tuple containing the player's rank, country, rating and birthyear'''
     player_dict = dict()
 
     for line in file_object:
@@ -35,17 +37,18 @@ def get_player_dict(file_object):
 
     return player_dict
 
-def get_country_dict(player_dict):
-    country_dict = dict()
+def get_order_dict(player_dict, key):
+    '''Returns a dictionary where the key is the given key and the value is a list of player names'''
+    order_dict = dict()
 
     for name, data in player_dict.items():
-        country = data[COUNTRY]
-        if country in country_dict:
-            country_dict[country].append(name)
+        country = data[key]
+        if country in order_dict:
+            order_dict[country].append(name)
         else:
-            country_dict[country] = [name]
+            order_dict[country] = [name]
 
-    return country_dict
+    return order_dict
 
 def print_header(heading):
     print(heading)
